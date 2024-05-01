@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MomentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,5 +20,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/test', [MomentController::class, 'edit'])->name('profile.edit');
+Route::get('/moments', [MomentController::class, 'list'])->name('moment.list');
+
+Route::get('/moment/create', [MomentController::class, 'create'])->name('moment.create');
+
 
