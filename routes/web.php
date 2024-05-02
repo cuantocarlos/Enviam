@@ -20,8 +20,15 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/moments', [MomentController::class, 'list'])->name('moment.list');
 
+
+
+//Moments
+
+
+
+            //URL              //CONTROLADOR            //FUNCIÓN         //ALIAS
 Route::get('/moment/create', [MomentController::class, 'create'])->name('moment.create');
+Route::post('/moment/store', [MomentController::class, 'store'])->name('moment.store');
 
-
+Route::get('/moments', [MomentController::class, 'list'])->name('moment.list');

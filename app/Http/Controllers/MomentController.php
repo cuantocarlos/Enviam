@@ -1,48 +1,47 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Moment;
 
+use App\Models\Moment;
+use Illuminate\Http\Request;
 
 class MomentController extends Controller
 {
-    //si esta registrado hacer un listado de los momentos del usuario 
 
+    //Formulario de creación momento
+    public function create()
+    {
+        //devolvemos una vista
+        return view('moment.create');
+    }
 
-    public function list(){
+    //Store de creación momento
+    public function store(Request $request)
+    {
+        //devolvemos una vista
+        $newMoment = new Moment;
+        $newMoment->name=$request['name'];
+        $newMoment->description=$request['description'];
+        $newMoment->save();
 
-        //todos los momentos
-        $moments = Moment::all();  
-
-        //solo escogemos un momento
-        $moment = Moment::whereId(2)->get();
-
-        $momentPepe = Moment::whereName('pepe')->get();
-        
-
-        dd($momentPepe);
-
+        //dd($newMoment);
     }
 
 
 
+        //si esta registrado hacer un listado de los momentos del usuario
 
-    public function create(){
-
-        // Crear un nuevo momento
-        $moment = new Moment();
-        $moment->name = 'Ejemplo de Momento';
-        $moment->description = 'Este es un momento de ejemplo creado en Laravel.';
-        $moment->link = 'www.google.com'; // Fecha y hora actual
-        $moment->pin = 12345;
-        $moment->save();
-
-    }
-
-
-
-
+        public function list()
+        {
+            //todos los momentos
+            $moments = Moment::all(); //por ahora cogemos todos, luego escogeremos lo del user logeado
+            //devolvemos una vista
+            //return view('moment.list');
+            
+           // return view('moments.list', ['moments' => $moments]);
+            return view('moment.list', compact('moments'));
+            //compac crea un array con los mismos datos de 
+        }
+    
 
 }
-
