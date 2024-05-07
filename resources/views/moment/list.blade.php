@@ -6,6 +6,12 @@
     <ul>
             @foreach($moments as $moment)
                 <li>{{ $moment->name }}</li>
+
+                @if ($moment->user)
+                    <p>Usuario: {{ $moment->user->nick }}</p>
+                @else
+                    <p>No se encontró un usuario asociado a este momento.</p>
+                @endif
             @endforeach
         
     </ul>

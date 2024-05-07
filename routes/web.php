@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MomentController;
 use App\Http\Controllers\MultimediaController;
+use App\Models\Moment; // Asegúrate de importar el modelo User
 
 
 Route::get('/', function () {
@@ -32,8 +33,18 @@ require __DIR__.'/auth.php';
             //URL              //CONTROLADOR            //FUNCIÓN         //ALIAS
 Route::get('/moment/create', [MomentController::class, 'create'])->name('moment.create');
 Route::post('/moment/store', [MomentController::class, 'store'])->name('moment.store');
-
 Route::get('/moments', [MomentController::class, 'list'])->name('moment.list');
 
 //solo admin ver todas las fotos subidas 
 Route::get('/admin/listAll', [MultimediaController::class, 'listAll'])->name('multimedia.listAll');
+
+
+
+
+Route::get('/test', function () {
+    $moment = Moment::find(1);
+    $user = $moment->user;
+    
+    dd($user->name);
+
+});

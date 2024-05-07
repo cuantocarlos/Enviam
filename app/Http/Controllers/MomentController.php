@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Moment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class MomentController extends Controller
 {
@@ -22,6 +24,15 @@ class MomentController extends Controller
         $newMoment = new Moment;
         $newMoment->name=$request['name'];
         $newMoment->description=$request['description'];
+        
+        //if user not logged
+        $userId = null;
+        if (Auth::check()) {
+            // El usuario está autenticado
+            $userId = Auth::id();
+        }
+        $newMoment->user_id = $userId;
+
         $newMoment->save();
 
         //dd($newMoment);

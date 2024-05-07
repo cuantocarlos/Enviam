@@ -16,7 +16,8 @@ class MultimediaController extends Controller
 
     //todos el contenido multimedia
     public function listAll(){
-        $multimedia = Multimedia::all();
+        $multimedia = Multimedia::orderBy('created_at', 'desc')->get();
         return view('multimedia.listAll', compact('multimedia'));
     }
+
 }
