@@ -7,7 +7,7 @@
     <input type="text" value="Bautizo" name="name">
 </br>
     <label for="">Descripción</label>
-    <input type="text" value="Bauizo de ana y antonia" name="description">
+    <input type="text" value="Bautizo de ana y antonia" name="description">
 </br>
     <button type="submit">Enviar</button>
 </form>

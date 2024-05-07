@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MomentController;
 use App\Http\Controllers\MultimediaController;
 use App\Models\Moment; // Asegúrate de importar el modelo User
+use App\Models\User; // Asegúrate de importar el modelo User
+use App\Models\Multimedia; // Asegúrate de importar el modelo User
+
 
 
 Route::get('/', function () {
@@ -42,9 +45,59 @@ Route::get('/admin/listAll', [MultimediaController::class, 'listAll'])->name('mu
 
 
 Route::get('/test', function () {
-    $moment = Moment::find(1);
-    $user = $moment->user;
     
-    dd($user->name);
+    $multi2 = new Multimedia;
+    $multi2->name = "mult2";
+    $multi2->moment_id = 1;
+    $multi2->user_id = 1;
+    $multi2->save();   
+
+    $multimedia = Multimedia::find(1);
+    $multimedia->user;
+    
+    dd($multimedia->user->nick);
+
+
+
+
+    $user = User::find(1);
+    dd($user->moments);
+    //dd($moment->multimedia[0]->name);
+
+    $multimedia = Multimedia::find(1);
+    $moment = $multimedia->moment;
+    dd($moment);
+
+
+
+    dd(0);
+
+    //creamos el momento 1
+
+    $multi1 = new Multimedia;
+    $multi1->name = "mult1";
+    $multi1->moment_id = 1;
+    $multi1->save();
+
+    //creamos el momento 2
+
+    $multi2 = new Multimedia;
+    $multi2->name = "mult2";
+    $multi2->moment_id = 1;
+    $multi2->save();   
+
+
+
+//    //$moment = Moment::find(1);
+    //$user = $moment->user;
+    //
+    //dd($user->name);
+
+
+
+
+
+
+
 
 });

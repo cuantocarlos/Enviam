@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('multimedia', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // $table->foreignId('user_id');
-            // $table->foreignId('momento_id')->constrained()->onDelete('cascade');
+
+            $table->unsignedBigInteger('moment_id');
+            $table->foreign('moment_id')->references('id')->on('moments')->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

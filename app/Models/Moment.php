@@ -18,7 +18,11 @@ class Moment extends Model
         return $this->belongsTo(User::class, );
     }
 
-
+    
+    public function multimedia()
+    {
+        return $this->hasMany(Multimedia::class);
+    }
 
 
 }

@@ -48,10 +48,13 @@ class User extends Authenticatable
 
     //relations always under
     
-    public function moment()
+    public function moments()
     {
-        return $this->hasOne(Moment::class);
+        return $this->hasMany(Moment::class);
     }
 
-    
+    public function multimedia()
+    {
+        return $this->hasMany(Multimedia::class);
+    }
 }
