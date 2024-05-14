@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name')->nullable();//esto creo que sobra
             //$table->foreignId('user_id')->constrained();
             //$table->foreignId('momento_id')->constrained();
             $table->timestamps();

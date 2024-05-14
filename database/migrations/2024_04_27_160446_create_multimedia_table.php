@@ -14,13 +14,19 @@ return new class extends Migration
         Schema::create('multimedia', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-
-            $table->unsignedBigInteger('moment_id');
-            $table->foreign('moment_id')->references('id')->on('moments')->onDelete('cascade');
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
+            //como se hacia antes
+            // $table->unsignedBigInteger('moment_id');
+            // $table->foreign('moment_id')->references('id')->on('moments')->onDelete('cascade');
+
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+
+            //como se hace ahora
+            $table->foreignId('moment_id')->constrained('moments')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
