@@ -29,7 +29,16 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+
+                
+                {{-- modificado por mi --}}
+                {{-- {{ $slot }} --}}
+                @yield('content')
+
+
+
+
+
             </main>
         </div>
     </body>

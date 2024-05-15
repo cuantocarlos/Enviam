@@ -20,7 +20,7 @@ class Moment extends Model
     
             self::created(function ($moment) {
                 // Crear la carpeta para el nuevo modelo multimedia
-                $folderName = "moments/{$moment->id}";
+                $folderName = "/public/moments/{$moment->id}";
                 Storage::makeDirectory($folderName);
             });
         }

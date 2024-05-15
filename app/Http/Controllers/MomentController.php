@@ -53,6 +53,12 @@ class MomentController extends Controller
             return view('moment.list', compact('moments'));
             //compac crea un array con los mismos datos de 
         }
-    
+
+        //Show the specific moment
+        public function show($id)
+        {
+            $moment = Moment::find($id);
+            return view('moment.show', compact('moment'));
+        }
 
 }
