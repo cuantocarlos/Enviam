@@ -14,4 +14,11 @@
             </div>
         </div>
     </div>
+
+{{-- @foreach ($moments as $moment)
+    <div>
+        <h2>{{ $moment->name }}</h2>
+        <p>{{ $moment->description }}</p>
+    </div>
+@endforeach --}}
 </x-app-layout>

@@ -11,9 +11,9 @@ class MultimediaController extends Controller
 {
     public function store(Request $request){
 
-        // $request->validate([
-        //     'file' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:4072', // Ajustar según necesidades
-        // ]);
+        $request->validate([
+            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:4072', // Ajustar según necesidades
+        ]);
 
 
         if ($request->hasFile('pics')) {
@@ -48,6 +48,14 @@ class MultimediaController extends Controller
         
     }
 
+    // public function download($id)
+    // {
+    //     $multimedia = Multimedia::findOrFail($id);
+
+    //     $file_path = storage_path('app/public/moments/' . $multimedia->moment_id . '/' . $multimedia->name);
+
+    //     return response()->download($file_path);
+    // }
 
 
 

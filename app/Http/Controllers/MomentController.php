@@ -42,7 +42,7 @@ class MomentController extends Controller
 
         //si esta registrado hacer un listado de los momentos del usuario
 
-        public function list()
+        public function listAllMoments()
         {
             //todos los momentos
             $moments = Moment::all(); //por ahora cogemos todos, luego escogeremos lo del user logeado
@@ -53,12 +53,26 @@ class MomentController extends Controller
             return view('moment.list', compact('moments'));
             //compac crea un array con los mismos datos de 
         }
+        
+        
+        //all user moments
+        public function userMoments()
+        {
+            $moments = Moment::where('user_id', Auth::id())->get();
+            return view('moment.list', compact('moments'));
+        }
 
         //Show the specific moment
         public function show($id)
         {
             $moment = Moment::find($id);
             return view('moment.show', compact('moment'));
+        }
+
+        public function mostrarTodosMomentosPropios()
+        {
+           // $moment = Moment::find($id);
+            return view('dashboard');
         }
 
 }
