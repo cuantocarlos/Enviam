@@ -32,8 +32,8 @@
 
                 
                 {{-- modificado por mi --}}
-                {{-- {{ $slot }} --}}
-                @yield('content')
+                {{ $slot }} 
+                {{-- @yield('content') --}}
 
 
 

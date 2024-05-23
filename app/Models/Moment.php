@@ -13,13 +13,11 @@ class Moment extends Model
     protected $fillable = ['user_id'];
 
 
-        //Para crear carpetas 
-        public static function boot()// for each moment create one folder for the media
+        //To create the corresponding folder each time a Moment is created. 
+        public static function boot()
         {
             parent::boot();
-    
             self::created(function ($moment) {
-                // Crear la carpeta para el nuevo modelo multimedia
                 $folderName = "/public/moments/{$moment->id}";
                 Storage::makeDirectory($folderName);
             });

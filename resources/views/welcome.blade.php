@@ -785,13 +785,13 @@
                     </header>
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                            <a
-                                href="{{ route('moment.create') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
+                            <a href="{{ route('moment.create') }}" class="rounded-md px-3 py-2 text-white bg-[#FF2D20] ring-1 ring-transparent transition hover:bg-[#FF2D20]/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-[#FF2D20] dark:hover:bg-[#FF2D20]/80 dark:focus-visible:ring-white">
                                 Crea un Momento
                             </a>
                         </div>
+                        <p class="mt-6 text-center text-lg text-black dark:text-white/70">
+                            Enviam nace de la frustración de ver cómo nuestras fotos pierden calidad al compartirlas. Queremos que tus recuerdos se vean tan nítidos como el día que los capturaste. Por eso, hemos creado una plataforma que te permite enviar fotos <!--y vídeos--> en su resolución original, de forma rápida, segura y sencilla.
+                        </p>
                     </main>
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">

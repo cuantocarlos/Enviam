@@ -12,15 +12,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-//Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'inactive', 'rermissionsControl']], function () {});
-//--------------------------------------------
+Route::get('/dashboard', [MomentController::class, 'userMoments'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
-//--------------------------------------------
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,29 +24,42 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-//Moments
 
-//URL              //CONTROLADOR            //FUNCIÓN         //ALIAS
+            //URL              //CONTROLADOR          //FUNCIÓN         //ALIAS
 Route::get('/moment/create', [MomentController::class, 'create'])->name('moment.create');
+Route::post('/moment/create', [MomentController::class, 'createNewMoment'])->name('moment.createNewMoment');
 Route::post('/moment/store', [MomentController::class, 'store'])->name('moment.store');
-Route::get('/moments', [MomentController::class, 'list'])->name('moment.list');
-Route::get('/mostrarTodos', [MomentController::class, 'mostrarTodosMomentosPropios'])->name('moment.mostrarTodos');
-//show moment
+
+// Route::get('/mostrarTodos', [MomentController::class, 'mostrarTodosMomentosPropios'])->name('moment.mostrarTodos');
+//show moment for use at dashboard and for share moments
 Route::get('/moment/{id}', [MomentController::class, 'show'])->name('moment.show');
+//eliminar un momento
+Route::delete('/moment/{id}', [MomentController::class, 'destroy'])->name('moment.destroy');
 //All user moments
 
 
 //guardo multimedia
 Route::post('/multimedia/store', [MultimediaController::class, 'store'])->name('multimedia.store');
-//descargar un multimedia
+//descargar un multimedia4
 Route::get('/multimedia/download/{id}', [MultimediaController::class, 'download'])->name('multimedia.download');
 
 
 //ADMIN
-//solo admin ver todas las fotos subidas
+//ver todas las fotos subidas
 Route::get('/admin/listAllMultimedia', [MultimediaController::class, 'listAll'])->name('multimedia.listAll');
-//all moments
-Route::get('/moments', [MomentController::class, 'listAllMoments'])->name('moment.listAll');
+//ver todos los momentos
+Route::get('/admin/moments', [MomentController::class, 'listAllMoments'])->name('moment.listAll');
+
+
+
+
+
+
+
+
+
+
+
 
 
 Route::get('/test', function () {

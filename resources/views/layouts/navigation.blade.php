@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (Auth::user() && Auth::user()->role == 'admin')
+                        <x-nav-link :href="route('multimedia.listAll')" :active="request()->routeIs('moment.multimedia.listAll')">
+                            {{ __('All Multimedia') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('moment.listAll')" :active="request()->routeIs('moment.listAll')">
+                            {{ __('All Moments') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -75,6 +83,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
