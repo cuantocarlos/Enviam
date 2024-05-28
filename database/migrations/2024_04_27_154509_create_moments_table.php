@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('moments', function (Blueprint $table) {
             $table->id();
+            // $table->Str::uuid();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             //manera de antes

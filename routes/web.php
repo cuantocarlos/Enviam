@@ -45,10 +45,12 @@ Route::get('/multimedia/download/{id}', [MultimediaController::class, 'download'
 
 
 //ADMIN
+Route::middleware('admin')->group(function () {
 //ver todas las fotos subidas
-Route::get('/admin/listAllMultimedia', [MultimediaController::class, 'listAll'])->name('multimedia.listAll');
+    Route::get('/admin/listAllMultimedia', [MultimediaController::class, 'listAll'])->name('multimedia.listAll');
 //ver todos los momentos
-Route::get('/admin/moments', [MomentController::class, 'listAllMoments'])->name('moment.listAll');
+    Route::get('/admin/moments', [MomentController::class, 'listAllMoments'])->name('moment.listAll');
+});
 
 
 

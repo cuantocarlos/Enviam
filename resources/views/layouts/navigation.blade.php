@@ -83,6 +83,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user() && Auth::user()->role == 'admin')
+                <x-responsive-nav-link :href="route('multimedia.listAll')" :active="request()->routeIs('moment.multimedia.listAll')">
+                    {{ __('All Multimedia') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('moment.listAll')" :active="request()->routeIs('moment.listAll')">
+                    {{ __('All Moments') }}
+                </x-responsive-nav-link>
+            @endif
 
         </div>
 
@@ -92,7 +100,6 @@
 
                 {{-- Modified by me --}}
                 @if (Auth::user())
-                <p>HOLA</p>
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 @else

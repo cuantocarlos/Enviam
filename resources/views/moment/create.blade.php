@@ -25,12 +25,12 @@
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                         </div>
 
-                        {{-- <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between">
                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit">
                                 Crear Momento
                             </button>
-                        </div> --}}
+                        </div> 
                         <!-- Campo para seleccionar las fotos -->
                         <div class="form-group">
                             <label for="pics">{{ __('Selecciona las fotos') }}</label>
