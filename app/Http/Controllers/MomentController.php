@@ -91,8 +91,8 @@ class MomentController extends Controller
         if ($moment === null) {
 
         }
-
-        return view('moment.show', ['moment' => $moment]);
+        $multimedia = $moment->multimedia;
+        return view('moment.show', ['moment' => $moment, 'multimedia' => $multimedia]);
     }
 
     // public function mostrarTodosMomentosPropios($id)//borrar
