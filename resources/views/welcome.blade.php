@@ -163,7 +163,7 @@
                     <ul
                         class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                         <li class="flex items-center me-4 md:me-6">
-                            <a href="#" class="hover:underline">Linkedin</a>
+                            <a href="https://www.linkedin.com/in/fcocarlosbeltran/" class="hover:underline">Linkedin</a>
                             <svg class="w-6 h-6 text-gray-800 dark:text-white ml-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
@@ -174,7 +174,7 @@
                             </svg>
                         </li>
                         <li class="flex items-center me-4 md:me-6">
-                            <a href="#" class="hover:underline">GitHub</a>
+                            <a href="https://github.com/cuantocarlos/Enviam" class="hover:underline">GitHub</a>
                             <svg class="w-6 h-6 text-gray-800 dark:text-white ml-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
