@@ -1,16 +1,16 @@
 <x-app-layout>
-
-    <head>
-
-    </head>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Este es tu Momento !') }}
+            {{ __('This is your Moment!') }}
         </h2>
     </x-slot>
-    @if ($moment == null)
-        <p>NO HAY CONTENIDO, este momento no existe</p>
-        <img src="https://d.newsweek.com/en/full/2223665/stock-image-sad-dog.jpg" class="error">
+
+    <!-- Check if the moment does not exist -->
+    @if ($moment === null)
+        <p>¡Parece que intentas acceder a un enlace que no contiene nada! <br>
+            NO HAY CONTENIDO, este momento no existe
+        </p>
+        <img src="{{ asset('images/stock-image-sad-dog.jpg') }}" class="error">
     @else
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -23,38 +23,7 @@
                             <p>{{ optional($moment->user)->name }}</p>
                         </div>
 
-                        {{-- Galería multimedia --}}
-                        {{-- 
-                            @if ($moment->multimedia)
-                                <div class="gallery">
-                                    @foreach ($moment->multimedia as $media)
-                                        <img src="{{ asset('storage/moments/' . $moment->id . '/' . $media->name) }}"
-                                            width="180" height="120">
-                                        <div class="desc">{{ $media->description }}</div>
-                                    @endforeach
-                                </div>
-                            @else
-                                <p>NO HAY CONTENIDO</p>
-                            @endif --}}
-{{-- 
-EL problema esta en que listAll tiene que acceder a la ubicación del momento
-
-                        @if ($moment->multimedia)
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                @foreach ($moment->multimedia as $media)
-                                    <div>
-                                        <img class="h-auto max-w-full rounded-lg"
-                                            src="{{ asset('storage/moments/' . $moment->id . '/' . $media->name) }}"
-                                            alt="">
-                                        <div class="desc">{{ $media->description }}</div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @include('components.gallery')
-                        @else
-                            <p>NO HAY CONTENIDO</p>
-                        @endif --}}
-                        {{-- Nueva Galeria --}}
+                        {{-- New Gallery --}}
                         @include('components.galleryShow')
 
                         {{-- Validation errors --}}
@@ -68,48 +37,72 @@ EL problema esta en que listAll tiene que acceder a la ubicación del momento
                             </div>
                         @endif
 
+                        <!--Buttons-->
+                        <div class="form-group flex justify-evenly">
+                            {{-- Photo upload form component --}}
+                            {{-- <form action="{{ route('multimedia.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
 
-                        {{-- componente de formulario de fotos --}}
-                        <form action="{{ route('multimedia.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                                <!-- Field to select photos -->
+                                <div class="form-group">
+                                    <label for="pics">{{ __('Select Photos') }}</label>
+                                    <input type="file" id="pics" name="pics[]" multiple
+                                        accept="image/*,video/*" class="form-control">
+                                </div>
 
-                            <!-- Campo para seleccionar las fotos -->
+                                <!-- Hidden field for moment ID -->
+                                <input type="hidden" name="moment_id" value="{{ $moment->id }}">
+
+                                <!-- Button to submit the form -->
+                                <div class="form-group">
+                                    <x-primary-button class="ms-4" id="submit-button">
+                                        {{ __('Add Photos') }}
+                                    </x-primary-button>
+                                </div>
+                            </form> --}}
+                            <form id="upload-form" action="{{ route('multimedia.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+
+                                <!-- Campo para seleccionar fotos -->
+                                <div class="form-group">
+                                    <label for="pics">{{ __('Select Photos') }}</label>
+                                    <input type="file" id="pics" name="pics[]" multiple
+                                        accept="image/*,video/*" class="form-control">
+                                </div>
+
+                                <!-- Campo oculto para el ID del momento -->
+                                <input type="hidden" name="moment_id" value="{{ $moment->id }}">
+
+                                <!-- Botón para enviar el formulario -->
+                                <div class="form-group">
+                                    <x-primary-button class="ms-4" id="submit-button" type="button"
+                                        style="display: none;">
+                                        {{ __('Add Photos') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+
+                            <!-- Botón para copiar URL del momento -->
                             <div class="form-group">
-                                <label for="pics">{{ __('Selecciona las fotos') }}</label>
-                                <input type="file" id="pics" name="pics[]" multiple class="form-control">
-                            </div>
-
-                            <!-- Campo oculto para el ID del momento -->
-                            <input type="hidden" name="moment_id" value="{{ $moment->id }}">
-
-                            <!-- Botón para enviar el formulario -->
-                            <div class="form-group">
-                                <x-primary-button class="ms-4">
-                                    {{ __('Añadir fotos') }}
+                                <x-primary-button class="ms-4" onclick="copyToClipboard()">
+                                    {{ __('Copy URL') }}
                                 </x-primary-button>
                             </div>
-                        </form>
-                        <!--boton para copiar momento-->
-                        <div class="form-group">
-                            <x-primary-button class="ms-4" onclick="copyToClipboard()">
-                                {{ __('Copiar URL') }}
-                            </x-primary-button>
+
+                            <!-- Botón para eliminar momento -->
+                            <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <x-primary-button class="ms-4" type="submit">
+                                    {{ __('Delete Moment') }}
+                                </x-primary-button>
+                            </form>
                         </div>
-                        <!--boton para eliminar momento-->
-                        <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <x-primary-button class="ms-4"
-                                type="submit">{{ __('Eliminar Momento') }}</x-primary-button>
-                        </form>
-
-
-                        {{-- button download all --}}
-                        {{-- <a href="{{ route('multimedia.downloadMoment', $moment->id) }}">Descargar todas las fotos</a> --}}
-
 
 
                         <script>
+                            // Script to copy the URL to the clipboard
                             function copyToClipboard() {
                                 var dummy = document.createElement('input'),
                                     text = window.location.href;
@@ -122,6 +115,44 @@ EL problema esta en que listAll tiene que acceder a la ubicación del momento
 
                                 alert('URL copiada al portapapeles');
                             }
+
+                            // Obtén referencias a los elementos del DOM
+                            var fileInput = document.getElementById('pics');
+                            var submitButton = document.getElementById('submit-button');
+
+                            // Deshabilita el botón de envío al inicio
+                            submitButton.disabled = true;
+
+                            // Agrega un controlador de eventos al input de archivos
+                            fileInput.onchange = function(e) {
+                                var files = this.files;
+
+                                // Si no se seleccionaron archivos, deshabilita el botón de envío
+                                if (files.length === 0) {
+                                    submitButton.disabled = true;
+                                } else {
+                                    // Si se seleccionaron archivos, habilita el botón de envío
+                                    submitButton.disabled = false;
+
+                                    // Valida el tipo de archivo seleccionado
+                                    for (var i = 0; i < files.length; i++) {
+                                        var file = files[i];
+                                        if (!file.type.match('image.*') && !file.type.match('video.*')) {
+                                            alert("Por favor, selecciona un archivo de imagen o video.");
+                                            this.value = ''; // Clear the input
+                                            submitButton.disabled = true; // Disable the submit button again
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            document.getElementById('pics').addEventListener('change', function() {
+                                if (this.files.length > 0) {
+                                    document.getElementById('upload-form').submit();
+                                }
+                            });
                         </script>
                     </div>
                 </div>
