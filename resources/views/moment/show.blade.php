@@ -1,14 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('This is your Moment!') }}
+            {{-- {{ __('dic.This is your Moment!') }} --}}
+
+
+            @if ($moment === null)
+                {{ __('dic.Moment not found') }}
+            @else
+                {{ $moment->name }}
+            @endif
+
         </h2>
     </x-slot>
 
     <!-- Check if the moment does not exist -->
     @if ($moment === null)
-        <p>¡Parece que intentas acceder a un enlace que no contiene nada! <br>
-            NO HAY CONTENIDO, este momento no existe
+        <p>{{__('dic.look_you_try')}}<br>
+            {{__('dic.no_content')}}
         </p>
         <img src="{{ asset('images/stock-image-sad-dog.jpg') }}" class="error">
     @else
@@ -17,7 +25,7 @@
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="container">
-                            <h1>{{ $moment->name }}</h1>
+                            <h1></h1>
                             <p>{{ $moment->description }}</p>
                             <p>{{ $moment->created_at }}</p>
                             <p>{{ optional($moment->user)->name }}</p>
@@ -86,7 +94,7 @@
                             <!-- Botón para copiar URL del momento -->
                             <div class="form-group">
                                 <x-primary-button class="ms-4" onclick="copyToClipboard()">
-                                    {{ __('Copy URL') }}
+                                    {{ __('dic.Copy URL') }}
                                 </x-primary-button>
                             </div>
 
@@ -95,7 +103,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <x-primary-button class="ms-4" type="submit">
-                                    {{ __('Delete Moment') }}
+                                    {{ __('dic.Delete Moment') }}
                                 </x-primary-button>
                             </form>
                         </div>

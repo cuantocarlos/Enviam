@@ -2,10 +2,10 @@
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">Nombre del Momento</th>
-                <th scope="col" class="px-6 py-3">Descripción</th>
-                <th scope="col" class="px-6 py-3">Nick del creador</th>
-                <th scope="col" class="px-6 py-3">Acciones</th>
+                <th scope="col" class="px-6 py-3">{{__('dic.name_moment')}}</th>
+                <th scope="col" class="px-6 py-3">{{__('dic.description_moment')}}</th>
+                <th scope="col" class="px-6 py-3">{{__('dic.nick_creator_moment')}}</th>
+                <th scope="col" class="px-6 py-3">{{__('dic.actions')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                         @if ($moment->user)
                             {{ $moment->user->nick }}
                         @else
-                            No se encontró un usuario asociado a este momento.
+                            {{ __('dic.no_registered_user') }}
                         @endif
                     </td>
                     <td class="px-6 py-4">

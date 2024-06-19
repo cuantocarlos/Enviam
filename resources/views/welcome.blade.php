@@ -47,12 +47,12 @@
                             @if (Route::has('login'))
                                 @auth
                                     <a href="{{ url('/dashboard') }}"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Dashboard</a>
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{__('Dashboard')}}</a>
                                 @else
                                     <a href="{{ route('login') }}"
-                                        class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+                                        class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">{{__('Log in')}}</a>
                                     <a href="{{ route('register') }}"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registro</a>
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{__('Register')}}</a>
                                 @endauth
                             @endif
                         </div>
@@ -100,7 +100,8 @@
             <section class="bg-white dark:bg-gray-900">
                 <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
                     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                        Tus fotos, sin perder un píxel</h1>
+                        {{__('dic.welcome_title')}}    
+                    </h1>
                     <div class="flex flex-row">
                         <!--image of take picture stairs-->
                         <div class="img-container">
@@ -110,17 +111,12 @@
                         <div>
                             
                             <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
-                                Enviam nace de la frustración de ver cómo nuestras fotos pierden calidad al
-                                compartirlas.
-                                Queremos que tus recuerdos se vean tan nítidos como el día que los capturaste. Por eso,
-                                hemos
-                                creado una plataforma que te permite enviar fotos <!--y vídeos--> en su resolución
-                                original, de
-                                forma rápida, segura y sencilla.</p>
+                                {{__('dic.welcome_born')}}
+                            </p>
                             <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                                 <a href="{{ route('moment.create') }}"
                                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                                    Crear un momento
+                                    {{__('dic.Create a Moment')}}
                                     <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
