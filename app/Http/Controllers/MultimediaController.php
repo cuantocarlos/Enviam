@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Multimedia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class MultimediaController extends Controller
 {
@@ -98,10 +99,16 @@ class MultimediaController extends Controller
 
     //delete multimedia
     public function destroy($id){
-        $multimedia = Multimedia::findOrFail($id);
-        $multimedia->delete();
+        $multimedia = Multimedia::find($id);
+        //$multimedia->delete();
         //delete file
+        // dd($multimedia);
+
+        $filePath = 'moments/' . $multimedia->moment_id . '/' . $multimedia->name;
         // Storage::delete('public/moments/' . $multimedia->moment_id . '/' . $multimedia->name);
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+        }
         //llevo otra vez al mismo momento
         // return Redirect::route('moment.show', ['id' => $multimedia->moment_id]);
         return \response()->json(['success' => 'Multimedia deleted']);

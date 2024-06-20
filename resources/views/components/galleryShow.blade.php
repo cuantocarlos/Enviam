@@ -3,7 +3,8 @@
         @foreach ($multimedia as $media)
             <div>
                 <img class="h-auto max-w-full rounded-lg open-img"
-                    src="{{ asset('storage/moments/' . $media->moment_id . '/' . $media->name) }}" alt="">
+                    src="{{ asset('storage/moments/' . $media->moment_id . '/' . $media->name) }}" alt=""
+                    data-id="{{ $media->id }}">
                 <div class="desc">{{ $media->description }}</div>
             </div>
         @endforeach
@@ -19,7 +20,7 @@
             });
 
             function openImg(e) {
-     
+
                 const modal = document.createElement('div');
                 modal.classList.add(
                     'fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'flex', 'justify-center', 'items-center',
@@ -62,8 +63,8 @@
                         // multimedia/{id} tipo delete
                         const token = document.querySelector('meta[name="csrf-token"]').getAttribute(
                             'content');
-                        // const response = await fetch('{{ route('multimedia.destroy', $media->id) }}', {
-                        const response = await fetch('/multimedia/' + {{ $media->id }}, {
+                        const mediaId = e.target.closest('.open-img').dataset.id;
+                        const response = await fetch('/multimedia/' + mediaId, {
                             method: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': token,

@@ -12,6 +12,7 @@ return [
     'Moment not found' => 'Momento no encontrado',
     'look_you_try' => '¡Parece que intentas acceder a un enlace que no contiene nada!',
     'no_content' => 'NO HAY CONTENIDO, este momento no existe o ha sido eliminado.',
+    
     //Tabla de listar momentos
     'name_moment' => 'Nombre del Momento',
     'description_moment' => 'Descripción del Momento',

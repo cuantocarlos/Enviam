@@ -18,7 +18,9 @@
         <p>{{ __('dic.look_you_try') }}<br>
             {{ __('dic.no_content') }}
         </p>
-        <img src="{{ asset('images/stock-image-sad-dog.jpg') }}" class="error">
+        <a href="{{ route('moment.create') }}">
+            <img src="{{ asset('images/stock-image-sad-dog.jpg') }}" class="error">
+        </a>
     @else
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
