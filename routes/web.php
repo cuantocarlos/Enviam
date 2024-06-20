@@ -42,6 +42,8 @@ Route::delete('/moment/{id}', [MomentController::class, 'destroy'])->name('momen
 Route::post('/multimedia/store', [MultimediaController::class, 'store'])->name('multimedia.store');
 //descargar un multimedia4
 Route::get('/multimedia/download/{id}', [MultimediaController::class, 'download'])->name('multimedia.download');
+//eliminar un multimedia
+Route::delete('/multimedia/{id}', [MultimediaController::class, 'destroy'])->name('multimedia.destroy');
 
 
 //ADMIN

@@ -96,4 +96,14 @@ class MultimediaController extends Controller
         return view('multimedia.listAll', compact('multimedia'));
     }
 
+    //delete multimedia
+    public function destroy($id){
+        $multimedia = Multimedia::findOrFail($id);
+        $multimedia->delete();
+        //delete file
+        // Storage::delete('public/moments/' . $multimedia->moment_id . '/' . $multimedia->name);
+        //llevo otra vez al mismo momento
+        // return Redirect::route('moment.show', ['id' => $multimedia->moment_id]);
+        return \response()->json(['success' => 'Multimedia deleted']);
+    }
 }

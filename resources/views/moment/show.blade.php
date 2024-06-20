@@ -15,16 +15,16 @@
 
     <!-- Check if the moment does not exist -->
     @if ($moment === null)
-        <p>{{__('dic.look_you_try')}}<br>
-            {{__('dic.no_content')}}
+        <p>{{ __('dic.look_you_try') }}<br>
+            {{ __('dic.no_content') }}
         </p>
         <img src="{{ asset('images/stock-image-sad-dog.jpg') }}" class="error">
     @else
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <div class="container">
+                    <div class="flex flex-col gap-4 p-6 text-gray-900 dark:text-gray-100">
+                        <div class="">
                             <h1></h1>
                             <p>{{ $moment->description }}</p>
                             <p>{{ $moment->created_at }}</p>
@@ -46,7 +46,8 @@
                         @endif
 
                         <!--Buttons-->
-                        <div class="form-group flex justify-evenly">
+                        <div
+                            class="flex fixed flex-wrap bottom-4 justify-center gap-2 bg-white rounded-lg md:rounded-full py-4 px-6 left-1/2 transform -translate-x-1/2">
                             {{-- Photo upload form component --}}
                             {{-- <form action="{{ route('multimedia.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -73,10 +74,24 @@
                                 @csrf
 
                                 <!-- Campo para seleccionar fotos -->
-                                <div class="form-group">
-                                    <label for="pics">{{ __('Select Photos') }}</label>
+                                <div class="form-group flex flex-wrap gap-1 items-center">
+                                    {{-- <label for="pics" class="whitespace-nowrap">{{ __('Select Photos') }}</label> --}}
                                     <input type="file" id="pics" name="pics[]" multiple
-                                        accept="image/*,video/*" class="form-control">
+                                        accept="image/*,video/*" class="hidden">
+                                    <x-primary-button class="" id="file-button" type="button">
+                                        {{ __('Add Photos') }}
+                                    </x-primary-button>
+
+                                    <script>
+                                        (function() {
+                                            const fileButton = document.getElementById('file-button');
+                                            const fileInput = document.getElementById('pics');
+
+                                            fileButton.addEventListener('click', function() {
+                                                fileInput.click();
+                                            });
+                                        })();
+                                    </script>
                                 </div>
 
                                 <!-- Campo oculto para el ID del momento -->
@@ -93,7 +108,7 @@
 
                             <!-- Botón para copiar URL del momento -->
                             <div class="form-group">
-                                <x-primary-button class="ms-4" onclick="copyToClipboard()">
+                                <x-primary-button class="ms-4 whitespace-nowrap" onclick="copyToClipboard()">
                                     {{ __('dic.Copy URL') }}
                                 </x-primary-button>
                             </div>
@@ -102,7 +117,7 @@
                             <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <x-primary-button class="ms-4" type="submit">
+                                <x-primary-button class="ms-4 whitespace-nowrap" type="submit">
                                     {{ __('dic.Delete Moment') }}
                                 </x-primary-button>
                             </form>

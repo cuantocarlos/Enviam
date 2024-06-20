@@ -4,18 +4,18 @@
             <tr>
                 <th scope="col" class="px-6 py-3">{{__('dic.name_moment')}}</th>
                 <th scope="col" class="px-6 py-3">{{__('dic.description_moment')}}</th>
-                <th scope="col" class="px-6 py-3">{{__('dic.nick_creator_moment')}}</th>
-                <th scope="col" class="px-6 py-3">{{__('dic.actions')}}</th>
+                <th scope="col" class="px-6 py-3 text-center">{{__('dic.nick_creator_moment')}}</th>
+                <th scope="col" class="px-6 py-3 text-center">{{__('dic.actions')}}</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($moments as $moment)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <a href="{{ route('moment.show', $moment->id) }}">{{ $moment->name }}</a>
-                    </th>
+                    </td>
                     <td class="px-6 py-4">{{ $moment->description }}</td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-center">
                         @if ($moment->user)
                             {{ $moment->user->nick }}
                         @else
