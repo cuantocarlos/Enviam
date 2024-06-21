@@ -38,5 +38,5 @@
         </tbody>
     </table>
 @else
-    <p class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">NO HAY MOMENTOS</p>
+    <p class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">{{__('dic.no_moments')}}</p>
 @endif

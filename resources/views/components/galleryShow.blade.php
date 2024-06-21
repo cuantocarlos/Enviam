@@ -13,7 +13,7 @@
     <script>
         //iife para encapsular el código JS y que se autoejecute
         (function() {
-            //que cuando se haga click en una imagen que le hemos puesto la clase open-img haga algo
+    //que cuando se haga click en una imagen que le hemos puesto la clase open-img haga algo
             const openImgElements = document.querySelectorAll('.open-img');
             openImgElements.forEach(openImgElement => {
                 openImgElement.addEventListener('click', openImg);
@@ -52,37 +52,39 @@
                 img.src = e.target.src;
                 img.classList.add('w-full', 'h-auto', 'max-w-full', 'max-h-full');
                 content.appendChild(img);
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.classList.add('absolute', 'bottom-8', 'right-8', 'h-12', 'w-12', 'text-white', 'bg-red-500',
-                    'rounded-full', 'flex', 'justify-center', 'items-center');
-                deleteBtn.innerHTML =
-                    `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>`;
-                deleteBtn.addEventListener('click', async () => {
-                    if (confirm('¿Estás seguro de que quieres borrar esta imagen?')) {
-                        // multimedia/{id} tipo delete
-                        const token = document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content');
-                        const mediaId = e.target.closest('.open-img').dataset.id;
-                        const response = await fetch('/multimedia/' + mediaId, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': token,
-                                'Content-Type': 'application/json'
+// boton de borrar
+                if (window.userCanDelete) {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.classList.add('absolute', 'bottom-8', 'right-8', 'h-12', 'w-12', 'text-white', 'bg-red-500',
+                        'rounded-full', 'flex', 'justify-center', 'items-center');
+                    deleteBtn.innerHTML =
+                        `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>`;
+                    deleteBtn.addEventListener('click', async () => {
+                        if (confirm('¿Estás seguro de que quieres borrar esta imagen?')) {
+                            // multimedia/{id} tipo delete
+                            const token = document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content');
+                            const mediaId = e.target.closest('.open-img').dataset.id;
+                            const response = await fetch('/multimedia/' + mediaId, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': token,
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                            const result = await response.json();
+                            console.log(result);
+                            if (result.success) {
+                                document.body.removeChild(modal);
+                                window.location.reload();
+                            } else {
+                                alert('No se ha podido borrar la imagen');
                             }
-                        });
-                        const result = await response.json();
-                        console.log(result);
-                        if (result.success) {
-                            document.body.removeChild(modal);
-                            window.location.reload();
-                        } else {
-                            alert('No se ha podido borrar la imagen');
-                        }
 
-                    }
-                });
-                content.appendChild(deleteBtn);
+                        }
+                    });
+                    content.appendChild(deleteBtn);
+                }
 
                 document.body.appendChild(modal);
             }

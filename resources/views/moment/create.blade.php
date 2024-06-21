@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create Moment') }}
+            {{ __('dic.Create a Moment') }}
         </h2>
     </x-slot>
 
@@ -13,14 +13,14 @@
                         @csrf
                         <div class="mb-4">
                             <label for="name" class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
-                                {{ __('Name Moment') }}</label>
+                                {{ __('dic.name_moment') }}</label>
                             <input type="text" name="name" id="name"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-6">
                             <label for="description"
                                 class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
-                                {{ __('Description') }}</label>
+                                {{ __('dic.description') }}</label>
                             <textarea name="description" id="description"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                         </div>
@@ -32,13 +32,15 @@
                             </button>
                         </div>  --}}
                         <!-- Campo para seleccionar las fotos -->
-                        <div class="form-group">
-                            <label for="pics">{{ __('Selecciona las fotos') }}</label>
-                            <input type="file" id="pics" name="pics[]" multiple class="form-control">
+                        <div class="flex items-center">
+                            <div class="form-group">
+                                {{-- <label for="pics">{{ __('Selecciona las fotos') }}</label> --}}
+                                <input type="file" id="pics" name="pics[]" multiple class="form-control">
+                            </div>
+                            <x-primary-button class="ms-4">
+                                {{ __('dic.create_moment') }}
+                            </x-primary-button>
                         </div>
-                        <x-primary-button class="ms-4">
-                            {{ __('Create Moment') }}
-                        </x-primary-button>
                     </form>
                 </div>
             </div>

@@ -47,41 +47,20 @@
                             </div>
                         @endif
 
-                        <!--Buttons-->
+                    <!--Buttons-->
                         <div
                             class="flex fixed flex-wrap bottom-4 justify-center gap-2 bg-white rounded-lg md:rounded-full py-4 px-6 left-1/2 transform -translate-x-1/2">
-                            {{-- Photo upload form component --}}
-                            {{-- <form action="{{ route('multimedia.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-
-                                <!-- Field to select photos -->
-                                <div class="form-group">
-                                    <label for="pics">{{ __('Select Photos') }}</label>
-                                    <input type="file" id="pics" name="pics[]" multiple
-                                        accept="image/*,video/*" class="form-control">
-                                </div>
-
-                                <!-- Hidden field for moment ID -->
-                                <input type="hidden" name="moment_id" value="{{ $moment->id }}">
-
-                                <!-- Button to submit the form -->
-                                <div class="form-group">
-                                    <x-primary-button class="ms-4" id="submit-button">
-                                        {{ __('Add Photos') }}
-                                    </x-primary-button>
-                                </div>
-                            </form> --}}
                             <form id="upload-form" action="{{ route('multimedia.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
 
-                                <!-- Campo para seleccionar fotos -->
+                    <!-- Campo para seleccionar fotos -->
                                 <div class="form-group flex flex-wrap gap-1 items-center">
                                     {{-- <label for="pics" class="whitespace-nowrap">{{ __('Select Photos') }}</label> --}}
                                     <input type="file" id="pics" name="pics[]" multiple
                                         accept="image/*,video/*" class="hidden">
                                     <x-primary-button class="" id="file-button" type="button">
-                                        {{ __('Add Photos') }}
+                                        {{ __('dic.add_photos') }}
                                     </x-primary-button>
 
                                     <script>
@@ -99,11 +78,11 @@
                                 <!-- Campo oculto para el ID del momento -->
                                 <input type="hidden" name="moment_id" value="{{ $moment->id }}">
 
-                                <!-- Botón para enviar el formulario -->
+                    <!-- Botón para enviar el formulario -->
                                 <div class="form-group">
                                     <x-primary-button class="ms-4" id="submit-button" type="button"
                                         style="display: none;">
-                                        {{ __('Add Photos') }}
+                                        {{ __('dic.add_photos') }}
                                     </x-primary-button>
                                 </div>
                             </form>
@@ -116,13 +95,19 @@
                             </div>
 
                             <!-- Botón para eliminar momento -->
-                            <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <x-primary-button class="ms-4 whitespace-nowrap" type="submit">
-                                    {{ __('dic.Delete Moment') }}
-                                </x-primary-button>
-                            </form>
+                            @if (
+                                $moment &&
+                                    (is_null($moment->user_id) ||
+                                        (auth()->check() && (auth()->id() == $moment->user_id || auth()->user()->hasRole('admin')))))
+                                <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-primary-button class="ms-4 whitespace-nowrap" type="submit">
+                                        {{ __('dic.Delete Moment') }}
+                                    </x-primary-button>
+                                </form>
+                            @endif
+
                         </div>
 
 
@@ -184,4 +169,16 @@
             </div>
         </div>
     @endif
+
+    @if (
+        !is_null($moment) &&
+            (is_null($moment->user_id) ||
+                (auth()->check() &&
+                    auth()->user() &&
+                    ($moment->user_id == auth()->id() || auth()->user()->hasRole('admin')))))
+        <script>
+            userCanDelete = true;
+        </script>
+    @endif
+
 </x-app-layout>

@@ -45,6 +45,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    //acces control has role
+    public function hasRole($role)
+    {
+        return $this->role == $role;
+    }
 
     //relations always under
     

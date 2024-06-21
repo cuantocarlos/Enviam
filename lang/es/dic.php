@@ -6,13 +6,19 @@ return [
     // Momentos
     'This is your Moment!' => '¡Este es tu Momento!',
     'Create a Moment' => 'Crea un Momento',
+    'create_moment' => 'Crear Momento',
     'Copy URL' => 'Copiar URL',
     'Delete Moment' => 'Eliminar Momento',
     'Edit Moment' => 'Editar Momento',
     'Moment not found' => 'Momento no encontrado',
     'look_you_try' => '¡Parece que intentas acceder a un enlace que no contiene nada!',
     'no_content' => 'NO HAY CONTENIDO, este momento no existe o ha sido eliminado.',
-    
+    'no_moments' => 'No tienes momentos creados',
+    'name_moment' => 'Nombre del Momento',
+    'description' => 'Descripción',
+    // Multimedia
+    'download' => 'Descargar',
+    'add_photos' => 'Añadir Fotos',
     //Tabla de listar momentos
     'name_moment' => 'Nombre del Momento',
     'description_moment' => 'Descripción del Momento',
