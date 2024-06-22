@@ -21,6 +21,12 @@ class MomentController extends Controller
 
     public function createNewMoment(Request $request)
     {
+        // Validate the request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv|max:100480',
+        ]);
         $newMoment = new Moment;
         $newMoment->name = $request['name'];
         $newMoment->description = $request['description'];
@@ -62,48 +68,6 @@ class MomentController extends Controller
         $newMoment->save();
 
     }
-//version mejorada revisar
-//     public function store(Request $request)
-// {
-//     // Validate the request
-//     $request->validate([
-//         'name' => 'required|string|max:255',
-//         'description' => 'required|string',
-//         'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv|max:20480',
-//     ]);
-
-//     // Create a new Moment instance
-//     $newMoment = new Moment;
-//     $newMoment->name = $request['name'];
-//     $newMoment->description = $request['description'];
-
-//     // Check if user is logged in
-//     $userId = null;
-//     if (Auth::check()) {
-//         $userId = Auth::id();
-//     }
-//     $newMoment->user_id = $userId;
-
-//     // Save the moment
-//     $newMoment->save();
-
-//     // Save multimedia files
-//     if ($request->hasFile('pics')) {
-//         foreach ($request->file('pics') as $file) {
-//             $filename = time() . '_' . $file->getClientOriginalName();
-//             $filePath = $file->storeAs('moments/' . $newMoment->id, $filename, 'public');
-
-//             $multimedia = new Multimedia;
-//             $multimedia->moment_id = $newMoment->id;
-//             $multimedia->name = $filename;
-//             $multimedia->path = $filePath;
-//             $multimedia->save();
-//         }
-//     }
-
-//     return redirect()->route('moment.show', $newMoment->id)->with('success', 'Moment created successfully.');
-// }
-
 
     //el admin puede ver todos los momentos
     public function listAllMoments()
@@ -129,14 +93,14 @@ class MomentController extends Controller
     public function show($id)
     {
         $moment = Moment::find($id);
-    
+
         if ($moment === null) {
             return view('moment.show', ['moment' => null, 'multimedia' => null]);
         }
-    
+
         $multimedia = $moment->multimedia;
         return view('moment.show', ['moment' => $moment, 'multimedia' => $multimedia]);
-    }    
+    }
 
     // public function mostrarTodosMomentosPropios($id)//borrar
     // {
@@ -158,5 +122,19 @@ class MomentController extends Controller
         $moment->delete();
         //eliminar la carpeta con las fotos
         Storage::deleteDirectory('public/moments/' . $id);
+    }
+
+    //Download files from a moment
+    public function download($id)
+    {
+        $moment = Moment::find($id);
+        $zip = new \ZipArchive();
+        $zipFileName = $moment->name . '.zip';
+        $zip->open(storage_path('app/public/moments/' . $zipFileName), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+        foreach ($moment->multimedia as $multimedia) {
+            $zip->addFile(storage_path('app/public/moments/' . $id . '/' . $multimedia->name), $multimedia->name);
+        }
+        $zip->close();
+        return response()->download(storage_path('app/public/moments/' . $zipFileName));
     }
 }

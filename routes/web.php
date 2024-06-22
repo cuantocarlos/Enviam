@@ -29,6 +29,8 @@ require __DIR__ . '/auth.php';
 Route::get('/moment/create', [MomentController::class, 'create'])->name('moment.create');
 Route::post('/moment/create', [MomentController::class, 'createNewMoment'])->name('moment.createNewMoment');
 Route::post('/moment/store', [MomentController::class, 'store'])->name('moment.store');
+//download moment
+Route::get('/moment/download/{id}', [MomentController::class, 'download'])->name('moment.download');
 
 // Route::get('/mostrarTodos', [MomentController::class, 'mostrarTodosMomentosPropios'])->name('moment.mostrarTodos');
 //show moment for use at dashboard and for share moments
@@ -40,7 +42,7 @@ Route::delete('/moment/{id}', [MomentController::class, 'destroy'])->name('momen
 
 //guardo multimedia
 Route::post('/multimedia/store', [MultimediaController::class, 'store'])->name('multimedia.store');
-//descargar un multimedia4
+//descargar un multimedia
 Route::get('/multimedia/download/{id}', [MultimediaController::class, 'download'])->name('multimedia.download');
 //eliminar un multimedia
 Route::delete('/multimedia/{id}', [MultimediaController::class, 'destroy'])->name('multimedia.destroy');

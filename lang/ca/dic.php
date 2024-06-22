@@ -16,6 +16,7 @@ return [
     'no_moments' => 'No tens moments creats',
     'name_moment' => 'Nom del Moment',
     'description' => 'Descripció',
+    'download_moment' => 'Descarregar Moment',
     // Multimedia
     'download' => 'Descarregar',
     'add_photos' => 'Afegir Fotos',

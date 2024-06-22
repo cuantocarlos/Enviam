@@ -15,7 +15,7 @@ class MultimediaController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:4072',
+            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:10072',
         ]);
 
         if ($request->hasFile('pics')) {
@@ -47,7 +47,7 @@ class MultimediaController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:4072', // Ajustar según necesidades
+            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:10072', // Ajustar según necesidades
         ]);
 
 
@@ -80,14 +80,14 @@ class MultimediaController extends Controller
         }
     }
 
-    // public function download($id)
-    // {
-    //     $multimedia = Multimedia::findOrFail($id);
+    public function download($id)
+    {
+        $multimedia = Multimedia::findOrFail($id);
 
-    //     $file_path = storage_path('app/public/moments/' . $multimedia->moment_id . '/' . $multimedia->name);
+        $file_path = storage_path('app/public/moments/' . $multimedia->moment_id . '/' . $multimedia->name);
 
-    //     return response()->download($file_path);
-    // }
+        return response()->download($file_path);
+    }
 
 
 

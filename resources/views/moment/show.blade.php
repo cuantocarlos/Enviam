@@ -1,3 +1,8 @@
+<style>
+    .grid-item {
+        margin-bottom: 16px; /* Ajusta el espaciado según sea necesario */
+    }
+</style>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -47,14 +52,14 @@
                             </div>
                         @endif
 
-                    <!--Buttons-->
+            <!--Buttons-->
                         <div
                             class="flex fixed flex-wrap bottom-4 justify-center gap-2 bg-white rounded-lg md:rounded-full py-4 px-6 left-1/2 transform -translate-x-1/2">
                             <form id="upload-form" action="{{ route('multimedia.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
 
-                    <!-- Campo para seleccionar fotos -->
+                    <!-- Campo para añadir fotos -->
                                 <div class="form-group flex flex-wrap gap-1 items-center">
                                     {{-- <label for="pics" class="whitespace-nowrap">{{ __('Select Photos') }}</label> --}}
                                     <input type="file" id="pics" name="pics[]" multiple
@@ -87,18 +92,25 @@
                                 </div>
                             </form>
 
-                            <!-- Botón para copiar URL del momento -->
+                    <!-- Botón para copiar URL del momento -->
                             <div class="form-group">
                                 <x-primary-button class="ms-4 whitespace-nowrap" onclick="copyToClipboard()">
                                     {{ __('dic.Copy URL') }}
                                 </x-primary-button>
                             </div>
 
-                            <!-- Botón para eliminar momento -->
                             @if (
                                 $moment &&
                                     (is_null($moment->user_id) ||
                                         (auth()->check() && (auth()->id() == $moment->user_id || auth()->user()->hasRole('admin')))))
+                    <!-- Botón para descargar Momento -->
+                                <form method="GET" action="{{ route('moment.download', $moment->id) }}">
+                                    @csrf
+                                    <x-primary-button class="ms-4 whitespace-nowrap" type="submit">
+                                        {{ __('dic.download_moment') }}
+                                    </x-primary-button>
+                                </form>
+                    <!-- Botón para eliminar momento -->
                                 <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
                                     @csrf
                                     @method('DELETE')
@@ -170,12 +182,7 @@
         </div>
     @endif
 
-    @if (
-        !is_null($moment) &&
-            (is_null($moment->user_id) ||
-                (auth()->check() &&
-                    auth()->user() &&
-                    ($moment->user_id == auth()->id() || auth()->user()->hasRole('admin')))))
+    @if (!is_null($moment) && (is_null($moment->user_id) || (auth()->check() && auth()->user() && ($moment->user_id == auth()->id() || auth()->user()->hasRole('admin')))))
         <script>
             userCanDelete = true;
         </script>

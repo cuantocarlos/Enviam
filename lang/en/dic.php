@@ -16,6 +16,7 @@ return [
     'no_moments'=>'You have no moments created',
     'name_moment'=>'Moment Name',
     'description'=>'Description',
+    'download_moment'=>'Download Moment',
     // Multimedia
     'download'=>'Download',
     'add_photos'=>'Add Photos',
