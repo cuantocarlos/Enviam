@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Multimedia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -22,15 +22,23 @@ class MultimediaController extends Controller
             $files = $request->file('pics');
             foreach ($files as $file) {
                 // Genera un nombre único para cada archivo
-                $fileName = uniqid() . '_' . $file->getClientOriginalName();
-                
-                // Guarda el archivo en el directorio especificado
-                $file->storeAs('public/moments/'.$request['moment_id'], $fileName);
+                $originalName = $file->getClientOriginalName();
+                $fileName = $originalName;
 
-                
-                // Crea y guarda la entrada en la base de datos
+                // Verificar si el archivo ya existe en la carpeta de destino
+                $counter = 1;
+                while (Storage::exists("public/moments/{$request['moment_id']}/{$fileName}")) {
+                    // Cambiar el nombre solo si ya existe otro archivo con el mismo nombre
+                    $fileName = pathinfo($originalName, PATHINFO_FILENAME) . '_' . $counter . '.' . $file->getClientOriginalExtension();
+                    $counter++;
+                }
+
+                // Guardar el archivo en el directorio especificado
+                $file->storeAs("public/moments/{$request['moment_id']}", $fileName);
+
+                // Crear y guardar la entrada en la base de datos
                 $newMultimedia = new Multimedia;
-                $newMultimedia->name = $fileName; // Guarda el nombre del archivo en la base de datos
+                $newMultimedia->name = $fileName; // Guardar el nombre del archivo en la base de datos
                 $newMultimedia->moment_id = $request['moment_id'];
                 if (Auth::user()) {
                     $newMultimedia->user_id = Auth::user()->id;
@@ -38,45 +46,49 @@ class MultimediaController extends Controller
                 $newMultimedia->save();
             }
         }
-        // dd($request);
+        // Redirigir o devolver una respuesta según lo necesario
     }
 
-
-
-        //Ya existe y hay que guardar fotos nuevas
-    public function store(Request $request){
-
+    //Ya existe el Momento y hay que guardar fotos nuevas
+    public function store(Request $request)
+    {
         $request->validate([
-            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:10072', // Ajustar según necesidades
+            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:10072',
         ]);
-
 
         if ($request->hasFile('pics')) {
             $files = $request->file('pics');
             foreach ($files as $file) {
-                // Genera un nombre único para cada archivo
-                $fileName = uniqid() . '_' . $file->getClientOriginalName();
-                
-                // Guarda el archivo en el directorio especificado
-                $file->storeAs('public/moments/'.$request['moment_id'], $fileName);
+                // Obtener el nombre original del archivo
+                $originalName = $file->getClientOriginalName();
+                $fileName = $originalName;
 
-                
-                // Crea y guarda la entrada en la base de datos
+                // Verificar si el archivo ya existe en la carpeta de destino
+                $counter = 1;
+                while (Storage::exists("public/moments/{$request['moment_id']}/{$fileName}")) {
+                    // Cambiar el nombre solo si ya existe otro archivo con el mismo nombre
+                    $fileName = pathinfo($originalName, PATHINFO_FILENAME) . '_' . $counter . '.' . $file->getClientOriginalExtension();
+                    $counter++;
+                }
+
+                // Guardar el archivo en el directorio especificado
+                $file->storeAs("public/moments/{$request['moment_id']}", $fileName);
+
+                // Crear y guardar la entrada en la base de datos
                 $newMultimedia = new Multimedia;
-                $newMultimedia->name = $fileName; // Guarda el nombre del archivo en la base de datos
+                $newMultimedia->name = $fileName; // Guardar el nombre del archivo en la base de datos
                 $newMultimedia->moment_id = $request['moment_id'];
-    
+
                 // Recojo el ID del usuario de la sesión
                 if (Auth::user()) {
                     $newMultimedia->user_id = Auth::user()->id;
                 }
-                
+
                 $newMultimedia->save();
-                
             }
-            //redirect to the same moment
-            return Redirect::route('moment.show', ['id' => $request->moment_id]);
-            
+
+            // Redireccionar al momento específico
+            return redirect()->route('moment.show', ['id' => $request->moment_id]);
         }
     }
 
@@ -89,16 +101,16 @@ class MultimediaController extends Controller
         return response()->download($file_path);
     }
 
-
-
     //all multimedia content
-    public function listAll(){
+    public function listAll()
+    {
         $multimedia = Multimedia::orderBy('created_at', 'desc')->get();
         return view('multimedia.listAll', compact('multimedia'));
     }
 
     //delete multimedia
-    public function destroy($id){
+    public function destroy($id)
+    {
         $multimedia = Multimedia::find($id);
         //$multimedia->delete();
         //delete file
