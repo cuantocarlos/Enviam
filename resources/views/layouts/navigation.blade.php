@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('moment.create')" :active="request()->routeIs('moment.create')">
+                        {{ __('Create Moment') }}
+                    </x-nav-link>
                     @if (Auth::user() && Auth::user()->role == 'admin')
                         <x-nav-link :href="route('multimedia.listAll')" :active="request()->routeIs('moment.multimedia.listAll')">
                             {{ __('All Multimedia') }}

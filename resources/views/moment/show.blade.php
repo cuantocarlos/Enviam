@@ -54,8 +54,8 @@
 
             <!--Buttons-->
                         <div
-                            class="flex fixed flex-wrap bottom-4 justify-center gap-2 bg-white rounded-lg md:rounded-full py-4 px-6 left-1/2 transform -translate-x-1/2">
-                            <form id="upload-form" action="{{ route('multimedia.store') }}" method="POST"
+                            class="flex fixed flex-wrap justify-center gap-2 w-full md:w-auto bg-white rounded-lg md:rounded-full py-4 px-6 left-1/2 transform -translate-x-1/2 bottom-0 md:bottom-4">
+                            <form id="upload-form" class="m-0" action="{{ route('multimedia.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
 
@@ -85,7 +85,7 @@
 
                     <!-- Botón para enviar el formulario -->
                                 <div class="form-group">
-                                    <x-primary-button class="ms-4" id="submit-button" type="button"
+                                    <x-primary-button class="" id="submit-button" type="button"
                                         style="display: none;">
                                         {{ __('dic.add_photos') }}
                                     </x-primary-button>
@@ -94,7 +94,7 @@
 
                     <!-- Botón para copiar URL del momento -->
                             <div class="form-group">
-                                <x-primary-button class="ms-4 whitespace-nowrap" onclick="copyToClipboard()">
+                                <x-primary-button class="whitespace-nowrap" onclick="copyToClipboard()">
                                     {{ __('dic.Copy URL') }}
                                 </x-primary-button>
                             </div>
@@ -104,17 +104,17 @@
                                     (is_null($moment->user_id) ||
                                         (auth()->check() && (auth()->id() == $moment->user_id || auth()->user()->hasRole('admin')))))
                     <!-- Botón para descargar Momento -->
-                                <form method="GET" action="{{ route('moment.download', $moment->id) }}">
+                                <form method="GET" class="m-0" action="{{ route('moment.download', $moment->id) }}">
                                     @csrf
-                                    <x-primary-button class="ms-4 whitespace-nowrap" type="submit">
+                                    <x-primary-button class="whitespace-nowrap" type="submit">
                                         {{ __('dic.download_moment') }}
                                     </x-primary-button>
                                 </form>
                     <!-- Botón para eliminar momento -->
-                                <form method="POST" action="{{ route('moment.destroy', $moment->id) }}">
+                                <form method="POST" class="m-0" action="{{ route('moment.destroy', $moment->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <x-primary-button class="ms-4 whitespace-nowrap" type="submit">
+                                    <x-primary-button class="whitespace-nowrap" type="submit">
                                         {{ __('dic.Delete Moment') }}
                                     </x-primary-button>
                                 </form>

@@ -1,8 +1,8 @@
 @if ($multimedia)
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="masonry-grid">
         @foreach ($multimedia as $media)
-            <div class="grid-item object-cover">
-                <img class="w-full h-full rounded-lg open-img"
+            <div class="grid-item">
+                <img class="w-full h-full rounded-lg open-img object-cover"
                     src="{{ asset('storage/moments/' . $media->moment_id . '/' . $media->name) }}" alt=""
                     data-id="{{ $media->id }}">
                 <div class="desc">{{ $media->description }}</div>
