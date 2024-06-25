@@ -122,6 +122,12 @@ class MomentController extends Controller
         $moment->delete();
         //eliminar la carpeta con las fotos
         Storage::deleteDirectory('public/moments/' . $id);
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('adminAllMoments');
+        }
+
     }
 
     //Download files from a moment
