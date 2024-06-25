@@ -93,6 +93,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('moment.create')" :active="request()->routeIs('moment.create')">
+                {{ __('Create Moment') }}
+            </x-responsive-nav-link>
             @if (Auth::user() && Auth::user()->role == 'admin')
                 <x-responsive-nav-link :href="route('multimedia.listAll')" :active="request()->routeIs('moment.multimedia.listAll')">
                     {{ __('dic.all_multimedia') }}

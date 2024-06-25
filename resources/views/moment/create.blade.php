@@ -32,12 +32,12 @@
                             </button>
                         </div>  --}}
                         <!-- Campo para seleccionar las fotos -->
-                        <div class="flex items-center">
+                        <div class="flex flex-col sm:flex-row items-center">
                             <div class="form-group">
                                 {{-- <label for="pics">{{ __('Selecciona las fotos') }}</label> --}}
                                 <input type="file" id="pics" name="pics[]" multiple class="form-control">
                             </div>
-                            <x-primary-button class="ms-4">
+                            <x-primary-button class="mt-4 sm:mt-0 sm:ms-4">
                                 {{ __('dic.create_moment') }}
                             </x-primary-button>
                         </div>
