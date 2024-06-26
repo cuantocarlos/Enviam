@@ -116,7 +116,7 @@
                         <!--image of take picture stairs-->
                         <div class="img-container">
                             <img class="img-blur object-cover max-h-80 sm:max-h-none w-full rounded-xl"
-                                src="{{ asset('images/stairs.webp') }}" alt="Taking a pic of Bucarest stairs">
+                                src="{{ asset('images/stairs.avif') }}" alt="Taking a pic of Bucarest stairs">
                         </div>
                         <div class="flex flex-col gap-6 md:gap-12 items-center">
 

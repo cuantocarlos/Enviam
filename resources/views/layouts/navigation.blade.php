@@ -16,14 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('moment.create')" :active="request()->routeIs('moment.create')">
-                        {{ __('Create Moment') }}
+                        {{ __('dic.create_moment') }}
                     </x-nav-link>
                     @if (Auth::user() && Auth::user()->role == 'admin')
                         <x-nav-link :href="route('multimedia.listAll')" :active="request()->routeIs('moment.multimedia.listAll')">
-                            {{ __('All Multimedia') }}
+                            {{ __('dic.all_multimedia') }}
                         </x-nav-link>
                         <x-nav-link :href="route('moment.listAll')" :active="request()->routeIs('moment.listAll')">
-                            {{ __('All Moments') }}
+                            {{ __('dic.All Moments') }}
                         </x-nav-link>
                     @endif
                 </div>
