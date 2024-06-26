@@ -25,7 +25,7 @@ class MomentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv|max:100480',
+            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv,heic,flv,mkv,mpeg,mpg,webm,bmp,tiff,webp|max:100480',
         ]);
         $newMoment = new Moment;
         $newMoment->name = $request['name'];

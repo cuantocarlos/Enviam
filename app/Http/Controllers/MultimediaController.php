@@ -15,7 +15,7 @@ class MultimediaController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:10072',
+            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv,heic,flv,mkv,mpeg,mpg,webm,bmp,tiff,webp|max:100480',
         ]);
 
         if ($request->hasFile('pics')) {
@@ -53,7 +53,7 @@ class MultimediaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pics.*' => 'required|file|mimes:jpeg,heif,png,jpg,gif,svg|max:10072',
+            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv,heic,flv,mkv,mpeg,mpg,webm,bmp,tiff,webp|max:100480',
         ]);
 
         if ($request->hasFile('pics')) {

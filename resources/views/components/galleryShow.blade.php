@@ -15,14 +15,14 @@
     <script>
         //masonry
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var elem = document.querySelector('#masonry-grid');
-            var msnry = new Masonry(elem, {
-                itemSelector: '.grid-item',
-                columnWidth: '.grid-item',
-                percentPosition: true
-            });
-        });
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var elem = document.querySelector('#masonry-grid');
+        //     var msnry = new Masonry(elem, {
+        //         itemSelector: '.grid-item',
+        //         columnWidth: '.grid-item',
+        //         percentPosition: true
+        //     });
+        // });
 
         //iife para encapsular el código JS y que se autoejecute
         (function() {
