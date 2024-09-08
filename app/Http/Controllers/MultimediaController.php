@@ -15,7 +15,7 @@ class MultimediaController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv,heic,flv,mkv,mpeg,mpg,webm,bmp,tiff,webp|max:100480',
+            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,bmp,tiff,webp,heic|max:100480',
         ]);
 
         if ($request->hasFile('pics')) {
@@ -53,7 +53,7 @@ class MultimediaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv,heic,flv,mkv,mpeg,mpg,webm,bmp,tiff,webp|max:100480',
+            'pics.*' => 'mimes:jpeg,png,jpg,gif,svg,bmp,tiff,webp,heic|max:100480',
         ]);
 
         if ($request->hasFile('pics')) {
@@ -121,6 +121,9 @@ class MultimediaController extends Controller
         if (Storage::disk('public')->exists($filePath)) {
             Storage::disk('public')->delete($filePath);
         }
+        //elimino el registro de la base de datos
+        $multimedia->delete();
+        
         //llevo otra vez al mismo momento
         // return Redirect::route('moment.show', ['id' => $multimedia->moment_id]);
         return \response()->json(['success' => 'Multimedia deleted']);
