@@ -23,7 +23,7 @@
                             {{ __('dic.all_multimedia') }}
                         </x-nav-link>
                         <x-nav-link :href="route('moment.listAll')" :active="request()->routeIs('moment.listAll')">
-                            {{ __('dic.All Moments') }}
+                            {{ __('dic.all_users_moments') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -101,7 +101,7 @@
                     {{ __('dic.all_multimedia') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('moment.listAll')" :active="request()->routeIs('moment.listAll')">
-                    {{ __('dic.All Moments') }}
+                    {{ __('dic.all_users_moments') }}
                 </x-responsive-nav-link>
             @endif
 

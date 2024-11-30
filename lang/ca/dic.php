@@ -8,7 +8,7 @@ return [
     'Create a Moment' => 'Crea un Moment',
     'create_moment' => 'Crear Moment',
     'Copy URL' => 'Copiar URL',
-    'Delete Moment' => 'Eliminar Moment',
+    'Delete Moment' => 'Esborrar Moment',
     'Edit Moment' => 'Editar Moment',
     'Moment not found' => 'Moment no trobat',
     'look_you_try' => 'Sembla que intentes accedir a un enllaç que no conté res',
@@ -31,5 +31,5 @@ return [
     'welcome_born' => 'Enviam naix de la frustració de vore com les nostres fotos perden qualitat al compartir-les. Volem que els teus records es vegen tan nítids com el dia que els vas capturar. Per això, hem creat una plataforma que et permet enviar fotos en la seua resolució original, de forma ràpida, segura i senzilla.',
     // Navbar
     'all_multimedia' => 'Tot el Multimedia',
-    'All Moments' => 'Tots els Moments',
+    'all_users_moments' => 'Moments de tots els usuaris',
 ];

@@ -31,5 +31,5 @@ return [
     'welcome_born'=>'Enviam was born out of the frustration of seeing how our photos lose quality when shared. We want your memories to look as sharp as the day you captured them. That is why we have created a platform that allows you to send photos in their original resolution, quickly, safely and easily.',
     // Navbar
     'all_multimedia' => 'All Multimedia',
-    'All Moments' => 'All Moments',
+    'all_users_moments' => 'All Users Moments',
 ];

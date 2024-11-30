@@ -28,7 +28,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <x-primary-button class="ms-4">
-                                    {{ __('Delete Moment') }}
+                                    {{ __('dic.Delete Moment') }}
                                 </x-primary-button>
                             </form>
                         @endif
