@@ -54,6 +54,10 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/listAllMultimedia', [MultimediaController::class, 'listAll'])->name('multimedia.listAll');
 //ver todos los momentos
     Route::get('/admin/moments', [MomentController::class, 'listAllMoments'])->name('moment.listAll');
+//informacion del sistema
+    Route::get('/admin/system-info', function () {
+        return view('admin.systemInfo');
+    })->name('admin.system-info');
 });
 
 
