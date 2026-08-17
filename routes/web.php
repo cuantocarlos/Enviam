@@ -71,7 +71,7 @@ Route::middleware('admin')->group(function () {
 
 
 
-
+/* Crea momentos y multimedia directamente 
 Route::get('/test', function () {
 
     $multi2 = new Multimedia;
@@ -115,3 +115,4 @@ Route::get('/test', function () {
     //dd($user->name);
 
 });
+*/
