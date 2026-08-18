@@ -16,6 +16,11 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        // Evitar que el admin se elimine a sí mismo
+        if (auth()->id() === (int)$id) {
+            return redirect()->route('users.listAll')->with('error', 'No puedes eliminar tu propia cuenta');
+        }
+
         $user = User::findOrFail($id);
         $user->delete();
 
