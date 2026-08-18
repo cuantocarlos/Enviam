@@ -31,6 +31,11 @@ return [
     'welcome_born' => 'Enviam nace de la frustración de ver cómo nuestras fotos pierden calidad al compartirlas. Queremos que tus recuerdos se vean tan nítidos como el día que los capturaste. Por eso, hemos creado una plataforma que te permite enviar fotos en su resolución original, de forma rápida, segura y sencilla.',
     // Navbar
     'all_multimedia' => 'Todo el Multimedia',
-    'all_users_moments' => 'Momentos de todos los usuarios'
-    
+    'all_users_moments' => 'Momentos de todos los usuarios',
+    // Usuarios
+    'all_users' => 'Todos los Usuarios',
+    'Delete' => 'Eliminar',
+    'name' => 'Nombre',
+    'systemInfo' => 'Información del Sistema'
+
 ];

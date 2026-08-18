@@ -25,6 +25,12 @@
                         <x-nav-link :href="route('moment.listAll')" :active="request()->routeIs('moment.listAll')">
                             {{ __('dic.all_users_moments') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('users.listAll')" :active="request()->routeIs('users.listAll')">
+                            {{ __('dic.all_users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.systemInfo')" :active="request()->routeIs('admin.systemInfo')">
+                            {{ __('dic.systemInfo') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>

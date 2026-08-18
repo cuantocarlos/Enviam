@@ -3,6 +3,7 @@
 use App\Http\Controllers\MomentController;
 use App\Http\Controllers\MultimediaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\Moment;
 use App\Models\Multimedia;
 use App\Models\User;
@@ -55,9 +56,13 @@ Route::middleware('admin')->group(function () {
 //ver todos los momentos
     Route::get('/admin/moments', [MomentController::class, 'listAllMoments'])->name('moment.listAll');
 //informacion del sistema
-    Route::get('/admin/system-info', function () {
+    Route::get('/admin/systemInfo', function () {
         return view('admin.systemInfo');
-    })->name('admin.system-info');
+    })->name('admin.systemInfo');
+
+//lista usuarios
+    Route::get('/admin/users', [UserController::class, 'listAllUsers'])->name('users.listAll');
+    Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 
