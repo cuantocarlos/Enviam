@@ -10,8 +10,8 @@
     "require": {
         "php": "^8.3",
         "laravel-lang/lang": "^15.5",
-        "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9"
+        "laravel/framework": "^13.0",
+        "laravel/tinker": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -20,7 +20,7 @@
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^11.0.1",
+        "phpunit/phpunit": "^12.0.0",
         "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
@@ -64,13 +64,6 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        },
-        "audit": {
-            "ignore": [
-                "PKSA-m5cs-t1y6-qpcs",
-                "PKSA-3r5d-mb8f-1qw9",
-                "PKSA-mdq4-51ck-6kdq"
-            ]
         }
     },
     "minimum-stability": "stable",
